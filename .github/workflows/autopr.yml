@@ -1,0 +1,52 @@
+name: Create automatic Pull Request
+
+on:
+  push:
+    branches:
+      - stage
+        #- master
+    
+jobs:
+  AutomaticPR:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checking out code
+        uses: actions/checkout@v4
+      - run: |
+          git config user.email noreply@github.com
+          git config user.name "GitHub actions"
+          git checkout -b stage
+          echo date > current-date.txt
+          git add current-date.txt
+          git commit --message "Some changes"
+          git push origin stage
+
+      - name: extract git commit data
+        uses: rlespinasse/git-commit-data-action@v1.x
+
+      - name: Update author information
+        run: echo ${{ env.GIT_COMMIT_AUTHOR_NAME }} > AUTHOR
+
+      - name: Raise PR 1
+        id: test1
+        uses: peter-evans/create-pull-request@v5
+        with:
+          branch: "branchcreate"
+          base: dev
+          title: "Automatic Pull request creation"
+        #  committer: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
+        #  author: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
+          body:
+            This is to show automatic PR creation
+            - Updated with *today's* date
+          labels: automerge
+          assignees: accenturetesting19
+          reviewers: accenturetesting19
+          token: ${{ secrets.GITHUB_TOKEN }}
+     # - name: Validate that PR exists
+     #   run: curl --fail https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.test1.outputs.number }}
+         delete-branch: true
+      - name: Pull request number
+        run: |
+          echo "Pull Request Number - ${{ steps.test1.outputs.pull-request-number }}"
+      
