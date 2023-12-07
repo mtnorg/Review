@@ -16,11 +16,11 @@ jobs:
           git config user.email noreply@github.com
           git config user.name "GitHub actions"
           git pull
-          git checkout stage
+          git checkout stage/${{ github.sha }}
           echo date > current-date.txt
           git add current-date.txt
           git commit --message "Some changes"
-          git push origin stage
+          git push origin stage/${{ github.sha }}
 
       - name: extract git commit data
         uses: rlespinasse/git-commit-data-action@v1.x
