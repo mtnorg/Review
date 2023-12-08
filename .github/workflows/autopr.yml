@@ -37,7 +37,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
      # - name: Validate that PR exists
      #   run: curl --fail https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.test1.outputs.number }}
-         delete-branch: true
+          delete-branch: true
       - name: Pull request number
         run: |
           echo "Pull Request Number - ${{ steps.test1.outputs.pull-request-number }}"
