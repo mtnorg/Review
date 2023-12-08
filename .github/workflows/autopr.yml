@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - feature
-        #- master
+      - dev
     
 jobs:
   AutomaticPR:
@@ -23,7 +23,7 @@ jobs:
         id: test1
         uses: peter-evans/create-pull-request@v5
         with:
-          branch: "branchcreate"
+          branch: "dev"
           #base: dev
           title: "Automatic Pull request creation"
         #  committer: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}">
@@ -37,7 +37,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
      # - name: Validate that PR exists
      #   run: curl --fail https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.test1.outputs.number }}
-          delete-branch: true
+          #delete-branch: true
       - name: Pull request number
         run: |
           echo "Pull Request Number - ${{ steps.test1.outputs.pull-request-number }}"
