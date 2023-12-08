@@ -3,7 +3,7 @@ name: Create automatic Pull Request
 on:
   push:
     branches:
-      - stage
+      - feature
         #- master
     
 jobs:
