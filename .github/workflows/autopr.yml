@@ -31,9 +31,9 @@ jobs:
           body:
             This is to show automatic PR creation
             - Updated with *today's* date
-          labels: automerge
-          assignees: accenturetesting19
-          reviewers: accenturetesting19
+          #labels: automerge
+          assignees: mtnorg
+          reviewers: mtnorg
           token: ${{ secrets.GITHUB_TOKEN }}
      # - name: Validate that PR exists
      #   run: curl --fail https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.test1.outputs.number }}
