@@ -1,7 +1,7 @@
 name: "CodeQL Analysis"
 on:
      workflow_run:
-         workflows: ["Create Automatic pull request"]
+         workflows: ["Create automatic Pull Request"]
          types:
            - completed
      pull_request:
