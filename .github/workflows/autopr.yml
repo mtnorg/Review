@@ -12,14 +12,6 @@ jobs:
     steps:
       - name: checking out code
         uses: actions/checkout@v4
-      - run: |
-          git config user.email noreply@github.com
-          git config user.name "GitHub actions"
-          git checkout -b stage
-          echo date > current-date.txt
-          git add current-date.txt
-          git commit --message "Some changes"
-          git push origin stage
 
       - name: extract git commit data
         uses: rlespinasse/git-commit-data-action@v1.x
