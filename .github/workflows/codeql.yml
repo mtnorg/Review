@@ -12,10 +12,14 @@
 name: "CodeQL"
 
 on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+     workflow_run:
+         workflows: ["Create automatic Pull Request"]
+         types:
+           - completed
+     push:
+       branches: [ "master" ]
+     pull_request:
+       branches: [ "feature" ]
   
 
 jobs:
